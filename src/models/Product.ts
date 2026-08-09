@@ -4,9 +4,10 @@ export interface IProduct extends Document {
   name: string;
   description: string;
   price: number;
-  category: "sillas" | "muebles" | "metalicos" | "accesorios";
+  category: "Sillas" | "Muebles" | "Metalicos" | "Accesorios";
   subcategory?: string;
   imageUrl: string;
+  images?: string[];
   stock: number;
 }
 
@@ -22,6 +23,7 @@ const productSchema = new Schema<IProduct>(
     },
     subcategory: { type: String, required: false },
     imageUrl: { type: String, required: true },
+    images: { type: [String], required: false, default: [] },
     stock: { type: Number, required: true, default: 0 },
   },
   { timestamps: true }
