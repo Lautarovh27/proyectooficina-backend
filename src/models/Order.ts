@@ -12,6 +12,8 @@ export interface IOrder extends Document {
     customerPhone: string;
     total: number;
     status: "pendiente" | "confirmado" | "entregado" | "cancelado";
+    paymentStatus: "pending" | "approved" | "rejected";
+    mpPreferenceId?: string;
 }
 
 const orderItemSchema = new Schema<IOrderItem>(
@@ -24,18 +26,24 @@ const orderItemSchema = new Schema<IOrderItem>(
 );
 
 const orderSchema = new Schema<IOrder>(
-    {
-        items: { type: [orderItemSchema], required: true },
-        customerName: { type: String, required: true },
-        customerPhone: { type: String, required: true },
-        total: { type: Number, required: true, min: 0 },
-        status: {
-            type: String,
-            enum: ["pendiente", "confirmado", "entregado", "cancelado"],
-            default: "pendiente",
-        },
+  {
+    items: { type: [orderItemSchema], required: true },
+    customerName: { type: String, required: true },
+    customerPhone: { type: String, required: true },
+    total: { type: Number, required: true, min: 0 },
+    status: {
+      type: String,
+      enum: ["pendiente", "confirmado", "entregado", "cancelado"],
+      default: "pendiente",
     },
-    { timestamps: true }
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+    },
+    mpPreferenceId: { type: String, required: false },
+  },
+  { timestamps: true }
 );
 
 export const Order = model<IOrder>("Order", orderSchema);
