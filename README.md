@@ -20,10 +20,15 @@ API REST para una plataforma de e-commerce de muebles de oficina, desarrollada c
 
 src/
 ├── config/ # Conexión a MongoDB
+
 ├── controllers/ # Lógica de cada endpoint
+
 ├── models/ # Schemas e interfaces de Mongoose + TypeScript
+
 ├── routes/ # Definición de rutas de Express
+
 ├── index.ts # Punto de entrada del servidor
+
 └── seed.ts # Script para cargar datos de ejemplo
 
 ## Cómo correrlo localmente
